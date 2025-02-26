@@ -117,6 +117,7 @@ class HFAgent(Agent):
                 response_text = model_output.rsplit(self.model_spec['output_split_prefix'], maxsplit=1)[1]
             """
             # remove eos token string:
+
             eos_to_cull = self.eos_to_cull
             response_text = re.sub(eos_to_cull, "", response_text)
         else:

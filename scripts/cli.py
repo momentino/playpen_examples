@@ -73,6 +73,8 @@ if __name__ == "__main__":
                             help="Argument to specify the arguments to initialize agents (comma-separated arguments).")
     run_parser.add_argument("-k", "--gen_kwargs", type=str, default="temperature=0.0,max_new_tokens=100",
                             help="Argument to specify the (comma-separated) generation arguments for agents.")
+    run_parser.add_argument("-c", "--eos_to_cull", type=str,
+                            help="Argument to specify the eos token. e.g. <|eot_id|>")
     run_parser.add_argument("-i", "--instances_name", type=str, default="instances",
                             help="The instances file name (.json suffix will be added automatically.")
     run_parser.add_argument("-r", "--results_dir", type=str, default=str(PROJECT_ROOT / "results"),
