@@ -17,6 +17,7 @@ class HFAgent(Agent):
         self.temperature = temperature
         self.max_new_tokens = max_new_tokens
         self.eos_to_cull = eos_to_cull
+        self.eos_to_cull = self.eos_to_cull.replace("|","\\|")
         self.model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto", torch_dtype="auto")
         self.tokenizer = AutoTokenizer.from_pretrained(model_name, device_map="auto", torch_dtype="auto",
                                                   verbose=False)
