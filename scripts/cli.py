@@ -39,6 +39,7 @@ def main(args: argparse.Namespace):
     if args.command_name == "run":
         game = load_benchmark(args.game, instances_name=args.instances_name)
         agents = build_agent_list(game=game, agent_kwargs=args.agent_kwargs, gen_kwargs=args.gen_kwargs)
+        print(agents)
         benchmark.run_playpen(args.game,
                       agents=agents,
                       experiment_name=args.experiment_name,
