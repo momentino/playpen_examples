@@ -5,12 +5,12 @@ from playpen.agents.clembench_agent import ClembenchAgent
 from playpen.clemgame.clemgame import GameBenchmark
 from src.utils.logger import out_logger
 
-def build_agent_list(game: GameBenchmark, agent_kwargs: str, gen_kwargs: str) -> List[Agent]:
+def build_agent_list(game: GameBenchmark, agent_kwargs: str, gen_kwargs: str, eos_to_cull: str) -> List[Agent]:
 
     agent_args = dict(pair.split("=") for pair in agent_kwargs.split(","))
     gen_kwargs = dict(pair.split("=") for pair in gen_kwargs.split(","))
 
-    agents = [HFAgent(gen_kwargs=gen_kwargs, **agent_args)]
+    agents = [HFAgent(eos_to_cull=eos_to_cull, gen_kwargs=gen_kwargs, **agent_args)]
     num_agents = 1 if game.is_single_player() else 2
     if len(agents) > num_agents:
         message = f"Too many agents for this game. The maximum number of player agents for this game is {max_num_agents}"
