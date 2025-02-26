@@ -106,7 +106,7 @@ class HFAgent(Agent):
         model_output = self.tokenizer.batch_decode(model_output_ids)[0]
 
         response = {'response': model_output}
-
+        print(" MODEL OUTPUT ", model_output)
         # cull input context; equivalent to transformers.pipeline method:
         if not return_full_text:
             response_text = model_output.replace(prompt_text, '').strip()
