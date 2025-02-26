@@ -1,8 +1,11 @@
 import argparse
 
+from pathlib import Path
 from playpen.clemgame import benchmark
 from playpen.clemgame.benchmark import load_benchmark
 from src.agents import build_agent_list
+
+PROJECT_ROOT = script_path = Path(__file__).resolve().parent
 
 """
     Use good old argparse to run the commands.
@@ -39,7 +42,6 @@ def main(args: argparse.Namespace):
     if args.command_name == "run":
         game = load_benchmark(args.game, instances_name=args.instances_name)
         agents = build_agent_list(game=game, agent_kwargs=args.agent_kwargs, gen_kwargs=args.gen_kwargs)
-        print(agents)
         benchmark.run_playpen(args.game,
                       agents=agents,
                       experiment_name=args.experiment_name,
@@ -73,7 +75,7 @@ if __name__ == "__main__":
                             help="Argument to specify the (comma-separated) generation arguments for agents.")
     run_parser.add_argument("-i", "--instances_name", type=str, default="instances",
                             help="The instances file name (.json suffix will be added automatically.")
-    run_parser.add_argument("-r", "--results_dir", type=str, default="results",
+    run_parser.add_argument("-r", "--results_dir", type=str, default=str(PROJECT_ROOT / "results"),
                             help="A relative or absolute path to the results root directory. "
                                  "For example '-r results/v1.5/de‘ or '-r /absolute/path/for/results'. "
                                  "When not specified, then the results will be located in './results'")

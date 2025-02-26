@@ -126,7 +126,7 @@ class HFAgent(Agent):
         return prompt, response, response_text
 
     def act(self) -> Tuple[Any, Any, str]:
-        prompt, response, response_text = self.model.generate_response(self.observations)
+        prompt, response, response_text = self.generate_response(self.observations)
         return prompt, response, response_text
 
     def observe(self, observation, reward, termination, truncation, info):
