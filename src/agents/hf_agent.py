@@ -1,4 +1,4 @@
-import re
+import torch
 from typing import Dict, Any, List, Tuple
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from playpen.agents.base_agent import Agent
@@ -18,7 +18,7 @@ class HFAgent(Agent):
         self.tokenizer = AutoTokenizer.from_pretrained(model_name, device_map="auto", torch_dtype="auto",
                                                   verbose=False)
         self.gen_kwargs = gen_kwargs
-        self.device = 'auto'
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"
 
     def _check_context_limit(self, context_size, prompt_tokens, max_new_tokens: int = 100) -> Tuple[bool, int, int, int]:
         """
