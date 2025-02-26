@@ -1,8 +1,8 @@
 from typing import List
-from agents.hf_agent import HFAgent
+from src.agents.hf_agent import HFAgent
 from playpen.agents.base_agent import Agent
 from playpen.clemgame.clemgame import GameBenchmark
-from utils.logger import out_logger
+from src.utils.logger import out_logger
 
 def build_agent_list(game: GameBenchmark, agent_kwargs: str, gen_kwargs: str) -> List[Agent]:
 

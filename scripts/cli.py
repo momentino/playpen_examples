@@ -1,11 +1,8 @@
 import argparse
-import json
-from typing import List
 
-from playpen.backends import ModelSpec
 from playpen.clemgame import benchmark
 from playpen.clemgame.benchmark import load_benchmark
-from agents import build_agent_list
+from src.agents import build_agent_list
 
 """
     Use good old argparse to run the commands.

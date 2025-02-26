@@ -1,0 +1,4 @@
+torch
+transformers
+accelerate
+playpen @ git+https://github.com/momentino/playpen@agents

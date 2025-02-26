@@ -3,7 +3,7 @@ from typing import Dict, Any, List, Tuple
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from playpen.agents.base_agent import Agent
 from playpen.backends.utils import ensure_alternating_roles, ContextExceededError
-from utils.logger import file_logger, out_logger
+from src.utils.logger import file_logger, out_logger
 
 class HFAgent(Agent):
     def __init__(self,
