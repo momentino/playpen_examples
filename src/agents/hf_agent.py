@@ -1,3 +1,4 @@
+import re
 import torch
 from typing import Dict, Any, List, Tuple
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -8,12 +9,14 @@ from src.utils.logger import file_logger, out_logger
 class HFAgent(Agent):
     def __init__(self,
                  model_name: str,
+                 eos_to_cull: str,
                  max_new_tokens: int = 100,
                  temperature: float = 0.0,
                  **gen_kwargs: Dict[str, Any]):
         super().__init__(name=model_name.split("/")[-1])
         self.temperature = temperature
         self.max_new_tokens = max_new_tokens
+        self.eos_to_cull = eos_to_cull
         self.model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto", torch_dtype="auto")
         self.tokenizer = AutoTokenizer.from_pretrained(model_name, device_map="auto", torch_dtype="auto",
                                                   verbose=False)
@@ -106,23 +109,21 @@ class HFAgent(Agent):
         model_output = self.tokenizer.batch_decode(model_output_ids)[0]
 
         response = {'response': model_output}
-        print(" MODEL OUTPUT ", model_output)
         # cull input context; equivalent to transformers.pipeline method:
         if not return_full_text:
             response_text = model_output.replace(prompt_text, '').strip()
 
             """if 'output_split_prefix' in self.model_spec:
                 response_text = model_output.rsplit(self.model_spec['output_split_prefix'], maxsplit=1)[1]
-
+            """
             # remove eos token string:
-            eos_to_cull = self.model_spec['eos_to_cull']
-            response_text = re.sub(eos_to_cull, "", response_text)"""
+            eos_to_cull = self.eos_to_cull
+            response_text = re.sub(eos_to_cull, "", response_text)
         else:
             response_text = model_output.strip()
-
+        print("RESPOSE TEXT ", response_text)
         if log_messages:
             file_logger.info(f"Response message: {response_text}")
-        print(" RESPONSE TEXT ", response_text)
         return prompt, response, response_text
 
     def act(self) -> Tuple[Any, Any, str]:
