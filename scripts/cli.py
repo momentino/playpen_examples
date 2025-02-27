@@ -7,34 +7,6 @@ from src.agents import build_agent_list
 
 PROJECT_ROOT = script_path = Path(__file__).resolve().parent.parent
 
-"""
-    Use good old argparse to run the commands.
-
-    To list available games: 
-    $> python3 scripts/cli.py ls
-
-    To run a specific game with a single player:
-    $> python3 scripts/cli.py run -g privateshared -m mock
-
-    To run a specific game with a two players:
-    $> python3 scripts/cli.py run -g taboo -m mock mock
-
-    If the game supports model expansion (using the single specified model for all players):
-    $> python3 scripts/cli.py run -g taboo -m mock
-
-    To score all games:
-    $> python3 scripts/cli.py score
-
-    To score a specific game:
-    $> python3 scripts/cli.py score -g privateshared
-
-    To score all games:
-    $> python3 scripts/cli.py transcribe
-
-    To score a specific game:
-    $> python3 scripts/cli.py transcribe -g privateshared
-"""
-
 
 def main(args: argparse.Namespace):
     if args.command_name == "ls":

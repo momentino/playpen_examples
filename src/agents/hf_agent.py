@@ -123,7 +123,6 @@ class HFAgent(Agent):
             response_text = re.sub(eos_to_cull, "", response_text)
         else:
             response_text = model_output.strip()
-        print("RESPOSE TEXT ", response_text)
         if log_messages:
             file_logger.info(f"Response message: {response_text}")
         return prompt, response, response_text
