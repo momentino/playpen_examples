@@ -5,7 +5,7 @@ from playpen.clemgame import benchmark
 from playpen.clemgame.benchmark import load_benchmark
 from src.agents import build_agent_list
 
-PROJECT_ROOT = script_path = Path(__file__).resolve().parent
+PROJECT_ROOT = script_path = Path(__file__).resolve().parent.parent
 
 """
     Use good old argparse to run the commands.
@@ -87,7 +87,7 @@ if __name__ == "__main__":
                               help="Optional argument to only run a specific experiment")
     score_parser.add_argument("-g", "--game", type=str,
                               help="A specific game name (see ls).", default="all")
-    score_parser.add_argument("-r", "--results_dir", type=str, default="results",
+    score_parser.add_argument("-r", "--results_dir", type=str, default=str(PROJECT_ROOT / "results"),
                               help="A relative or absolute path to the results root directory. "
                                    "For example '-r results/v1.5/de‘ or '-r /absolute/path/for/results'. "
                                    "When not specified, then the results will be located in './results'")
@@ -97,7 +97,7 @@ if __name__ == "__main__":
                                    help="Optional argument to only run a specific experiment")
     transcribe_parser.add_argument("-g", "--game", type=str,
                                    help="A specific game name (see ls).", default="all")
-    transcribe_parser.add_argument("-r", "--results_dir", type=str, default="results",
+    transcribe_parser.add_argument("-r", "--results_dir", type=str, default=str(PROJECT_ROOT / "results"),
                                    help="A relative or absolute path to the results root directory. "
                                         "For example '-r results/v1.5/de‘ or '-r /absolute/path/for/results'. "
                                         "When not specified, then the results will be located in './results'")
